@@ -1,4 +1,4 @@
-use std::ops::Deref;
+use std::ops::{Deref, DerefMut};
 
 const ARRAY_SIZE: usize = 5;
 
@@ -11,7 +11,7 @@ enum Node<T> {
 
 #[derive(Debug)]
 pub struct ArrayQueueBoxLifetime<'a, T: Default> {
-    data: [Node<Box<&'a T>>; ARRAY_SIZE],
+    data: [Node<Box<&'a mut T>>; ARRAY_SIZE],
     head: usize,
     elements: usize,
 }
@@ -26,7 +26,7 @@ impl<'a, T: Default> ArrayQueueBoxLifetime<'a, T> {
         }
     }
 
-    pub fn enqueue(&mut self, value: &'a T) {
+    pub fn enqueue(&mut self, value: &'a mut T) {
         // if ARRAY_SIZE <= self.elements {
         //     panic!("Queue is full");
         // }
@@ -39,16 +39,16 @@ impl<'a, T: Default> ArrayQueueBoxLifetime<'a, T> {
         }
     }
 
-    pub fn dequeue(&mut self) -> Option<&T> {
+    pub fn dequeue(&mut self) -> Option<& mut T> {
         if self.elements == 0 {
             return None;
         }
-        let value = &self.data[self.head];
+        let value = & mut self.data[self.head];
         self.head = (self.head + 1) % ARRAY_SIZE;
         self.elements -= 1;
         match value {
             Node::Nil => None,
-            Node::Element(v) => Some(v.deref()),
+            Node::Element(v) => Some(v.deref_mut()),
         }
     }
 
@@ -66,7 +66,7 @@ impl<'a, T: Default> ArrayQueueBoxLifetime<'a, T> {
         self.elements == 0
     }
 
-    pub fn modifyHeadElement(&mut self, value: &'a T) {
+    pub fn modifyHeadElement(&mut self, value: &'a mut T) {
         if 0 < self.elements {
             match &mut self.data[self.head] {
                 Node::Nil => (),
