@@ -1,0 +1,37 @@
+[package]
+name = "data_structures_in_rust"
+version = "0.1.0"
+edition = "2021"
+default-run = "main"
+
+[[bin]]
+name = "main"
+path = "src/main.rs"
+test = true
+
+[[bin]]
+name = "main_array_queue_int"
+path = "src/bin/main_array_queue_int.rs"
+test = true
+
+[[bin]]
+name = "main_array_queue_generic"
+path = "src/bin/main_array_queue_generic.rs"
+test = true
+
+[[bin]]
+name = "main_array_queue_box"
+path = "src/bin/main_array_queue_box.rs"
+test = true
+
+[[bin]]
+name = "main_ok_stack_generic"
+path = "src/bin/main_ok_stack_generic.rs"
+test = true
+
+[[bin]]
+name = "main_bin_tree"
+path = "src/bin/main_bin_tree.rs"
+test = true
+
+[dependencies]
