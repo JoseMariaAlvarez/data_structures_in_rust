@@ -4,10 +4,12 @@ use std::{cell::RefCell, rc::Rc};
 
 #[derive(Debug, Clone)]
 pub struct TreeNode {
-    val: i32,
-    left: Option<TreeNodeRef>,
-    right: Option<TreeNodeRef>,
+  val: i32,
+  left: Option<TreeNodeRef>,
+  right: Option<TreeNodeRef>,
 }
+
+pub type TreeNodeRef = Rc<RefCell<TreeNode>>;
 
 impl TreeNode {
     pub fn new(val: i32) -> Self {
@@ -42,4 +44,3 @@ impl TreeNode {
         self.right.clone()
     }
   }
-pub type TreeNodeRef = Rc<RefCell<TreeNode>>;
