@@ -758,5 +758,36 @@ fn main() {
 
 En el ejemplo anterior, la función `longest` se hace genérica sobre la *lifetime* `'a`. Con la definición anterior, se exige que el resultado de la función tenga un intervalo de vida menor o igual que el menor de los intervalos de vida de los parámetros con los que se llame a la función.
 
+## Operaciones útiles sobre tipos habituales
+
+### Option< T >
+
+- `unwrap(self) -> T`. Devuelve el valor contenido en un valor *option* de tipo `Some` o genera un *panic* si `self` es el valor `None`. `self` se pasa por copia, por lo que se consume y no se puede usar si `self` se ha pasado por referencia. Se recomienda usar `unwrap_or_else` o `unwrap_or_default` para evitar el *panic*.
+
+- `unwrap_or_else(self, F: FnOnce() -> T,) -> T`. Devuelve el valor contenido en un valor *option* de tipo `Some` o el valor calculado con el cierre pasado como parámetro si `s el` es el valor `None`. `self` se pasa por copia, por lo que se consume y no se puede usar si `self` se ha pasado por referencia.
+
+- `unwrap_or_default(self) -> T`. Devuelve el valor contenido en un valor *option* de tipo `Some` o el valor por defecto del tipo `T` si `s el` es el valor `None`. `self` se pasa por copia, por lo que se consume y no se puede usar si `self` se ha pasado por referencia. El tipo `T` tiene que implementar el *trait* `Default`
+
+- `as_ref(&self) -> Option<&T>`. A partir de una referencia a un valor *option*, Devuelve un valor *option* a una referencia del tipo. De esa manera, el resultado se puede componer con otras funciones que toman el parámetro por valor y lo consumen, como `map`, sin perder el original, ya que lo que se consume es la referencia al valor original, no el valor original.
+
+- `as_mut(&mut self) -> Option<&mut T>`. Proporciona una funcionalidad similar a `as_ref` pero tratando con referencias mutables.
+
+- `expect(self, msg: &str) -> T`. Devuelve el valor contenido si `self` es de la forma `Some(T)`, o genera un *panic* con el mensaje que se pasa como parámetro si `self` es el valor `None`. `self` se pasa por copia, por lo que se consume y no se puede usar si `self` se ha pasado por referencia.
+
+- `map<U, F>(self, FnOnce(T) -> U) -> Option<U>`. Transforma un valor `Option<T>` a un valor `Option<U>` aplicando la función parámetro al valor contenido (si `self` es un tipo `Some`) o devuelve `None` si `self` es el valor `None`. `self` se pasa por copia, por lo que se consume y no se puede usar si `self` se ha pasado por referencia.
+
+- `insert(&mut self, value: T) -> &mut T`. Insertar un valor en la opción y devuelve una referencia mutable al valor. Si la opción ya contenía un valor, ese valor se pierde.
+
+- `fn take(&mut self) -> Option<T>`. Coge el valor de la opción y lo devuelve, dejando `None` en su lugar.
+
+- `replace(&mut self, value: T) -> Option<T>`. Sustituye el valor actual de la opción por una opción del tipo `Some` con el valor pasado como parámetro. Devuelve el anterior contenido de la opción.
+
+- `copied(self) -> Option<T>`. Pasa un valor `Option<&T>` a uno `Option<T>` haciendo una copia del contenido de la opción. El tipo `T` tiene que implementar el trait `Copy`.
+
+- `cloned(self) -> Option<T>`. Pasa un valor `Option<&T>` a uno `Option<T>`  clonando el contenido de la opción. El tipo `T` tiene que implementar el trait `Clone`.
+
+
+
+
 ## Documentación
 [The Rust Book](https://doc.rust-lang.org/book/title-page.html)

@@ -30,8 +30,18 @@ path = "src/bin/main_ok_stack_generic.rs"
 test = true
 
 [[bin]]
+name = "main_cons_list"
+path = "src/bin/main_cons_list.rs"
+test = true
+
+[[bin]]
 name = "main_bin_tree"
 path = "src/bin/main_bin_tree.rs"
+test = true
+
+[[bin]]
+name = "main_binary_tree"
+path = "src/bin/main_binary_tree.rs"
 test = true
 
 [dependencies]

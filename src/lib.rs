@@ -4,4 +4,6 @@ pub mod array_queue_box;
 pub mod array_queue_box_option;
 pub mod ok_stack_generic;
 pub mod simple_list;
+pub mod cons_list;
 pub mod bin_tree;
+pub mod binary_tree;
