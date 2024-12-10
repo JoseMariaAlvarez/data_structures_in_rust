@@ -44,4 +44,9 @@ name = "main_binary_tree"
 path = "src/bin/main_binary_tree.rs"
 test = true
 
+[[bin]]
+name = "main_binary_search_tree"
+path = "src/bin/main_binary_search_tree.rs"
+test = true
+
 [dependencies]
