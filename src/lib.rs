@@ -7,3 +7,4 @@ pub mod simple_list;
 pub mod cons_list;
 pub mod bin_tree;
 pub mod binary_tree;
+pub mod binary_search_tree;
